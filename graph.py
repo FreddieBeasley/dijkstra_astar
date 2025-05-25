@@ -22,6 +22,8 @@ class Graph:
           self.__vertices = []
           self.__edges = []
 
+          self.__adjacency_list = {}
+
      #Getter
      def get_vertices(self):
           return self.__vertices
@@ -29,13 +31,31 @@ class Graph:
      def get_edges(self):
           return self.__edges
      
+     def get_adjacency_list(self):
+          return self.__adjacency_list
+     
      #Adder
      def add_vertex(self, vertex:Vertex):
           self.__vertices.append(vertex)
+
+          #update adjacency list
+          self.__adjacency_list[vertex.get_lable()] = []
      
      def add_edge(self, edge:Edge):
+          #validate edge
+          for vertex in edge.get_vertices():
+               if vertex not in self.__vertices:
+                    return
+
           self.__edges.append(edge)
 
+          #update adjacency list
+          vertexA, vertexB = edge.get_vertices()
+
+          self.__adjacency_list[vertexA.get_lable()].append((vertexB.get_lable(),edge.get_weight()))
+
+          self.__adjacency_list[vertexB.get_lable()].append((vertexA.get_lable(),edge.get_weight()))
+          
      def lookUp_vertex(self, lable:str):
           for vertex in self.__vertices:
                if vertex.get_lable() == lable:
@@ -49,14 +69,12 @@ vertexB = Vertex("b")
 vertexC = Vertex("c")
 vertexD = Vertex("d")
 vertexE = Vertex("e")
-vertexF = Vertex("f")
 
 my_graph.add_vertex(vertexA)
 my_graph.add_vertex(vertexB)
 my_graph.add_vertex(vertexC)
 my_graph.add_vertex(vertexD)
 my_graph.add_vertex(vertexE)
-my_graph.add_vertex(vertexF)
 
 my_graph.add_edge(Edge(5,vertexA, vertexB))
 my_graph.add_edge(Edge(7,vertexA, vertexC))
@@ -65,6 +83,8 @@ my_graph.add_edge(Edge(4,vertexB, vertexD))
 my_graph.add_edge(Edge(4,vertexC, vertexD))
 my_graph.add_edge(Edge(6,vertexC, vertexE))
 my_graph.add_edge(Edge(5,vertexD, vertexE))
+
+print(my_graph.get_adjacency_list())
 
 
 """
