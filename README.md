@@ -1,1 +1,1 @@
-This repository aims to use the graph logic which I have previously created in the graph.py files to create the dijkstra algorithm which finds the shortest path between a vertex and any/all other vertices in the graph.
+This repository aims to use the graph logic which I have created in the graph.py files to create the dijkstra algorithm which finds the shortest path between a vertex and any/all other vertices in the graph. In additon, it attemps to implement A* search too in a similar way.
